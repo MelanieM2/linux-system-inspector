@@ -9,7 +9,8 @@ def get_network_info() -> dict:
                                                        # Without this flag, psutil returns one combined total across all interfaces. 
                                                        # With pernic=True it returns a dictionary keyed by interface name, 
                                                        # so we can look up I/O stats for each interface individually.
-
+    
+    ## TODO: add --remote flag to run inspection over SSH on a remote host
     for interface_name, addresses in psutil.net_if_addrs().items():
 
         interface_addresses = []
