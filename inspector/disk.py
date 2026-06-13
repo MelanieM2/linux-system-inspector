@@ -6,6 +6,9 @@ def get_disk_info() -> dict:
 
     partitions = []
 
+    # TODO: consider psutil.disk_partitions(all=True) to include Windows drives (/mnt/c etc.)
+    # TODO: consider deduplicating partitions by device to avoid redundant entries
+
     for partition in psutil.disk_partitions(): # Returns a list of all mounted partitions on the system. Each partition is a "named tuple" with fields:
         try:
             usage = psutil.disk_usage(partition.mountpoint)
