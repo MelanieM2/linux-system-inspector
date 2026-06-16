@@ -1,5 +1,7 @@
 from inspector.cpu import get_cpu_info
 
+# TODO: mock psutil.cpu_percent(interval=1) to avoid 1s sleep per call
+# currently causes ~14s test suite runtime — acceptable now, fix when suite grows
 
 def test_get_cpu_info_returns_dict():
     result = get_cpu_info()

@@ -21,7 +21,7 @@ def get_cpu_info() -> dict:
 
         # Measuring the CPU usage as a percentage. The interval=1 argument means "measure over 1 second.  This is important: CPU usage is not a snapshot, it's a ratio of busy time to total time over an interval
         "usage_percent_overall": psutil.cpu_percent(interval=1), # Without percpu → returns one number for overall CPU usage
-        "usage_percent_per_core": psutil.cpu_percent(interval=1, percpu=True), # with percpu = Ture, it returns a list, one percentage per logical core
+        "usage_percent_per_core": psutil.cpu_percent(interval=1, percpu=True), # with percpu = True, it returns a list, one percentage per logical core
 
         # On some systems (including some WSL2 configurations) this can return None, which is why we write:
         "freq_current_mhz": round(freq.current, 1) if freq else None,
