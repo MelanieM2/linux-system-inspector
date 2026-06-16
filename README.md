@@ -189,6 +189,14 @@ We apply supply chain security practices to all dependencies. See [SECURITY.md](
 
 ---
 
+## Development Notes
+
+Developed through guided learning sessions using **Claude Sonnet 4.6** 
+(Anthropic) as an AI pair-programming assistant used via chat interface. This was used to explain and learn
+concepts, review code structure, and discuss design decisions. 
+All modules were written, tested, and validated by the author, 
+with a focus on deep understanding over code generation.
+
 ## Author
 
 Melanie Maldonado is a professional Mathematician (Differential Geometry and Mathematical Physics), transitioning to AI/Data Science/ML Engineering.
