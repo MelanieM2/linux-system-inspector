@@ -1,59 +1,37 @@
 # Linux System Inspector
 
-A command-line tool that inspects a Linux system and produces structured reports on CPU, RAM, disk, network, and operating system information. Output is available in human-readable Markdown or machine-readable JSON.
+A command-line system inspection tool that collects and reports structured information about CPU, memory, disk, network, and operating system state.
 
-Built as the first portfolio project in a structured transition toward AI/Data Science and ML engineering, this tool demonstrates professional Python packaging, defensive programming, CLI design, and supply chain security practices.
+The tool is designed as a portable systems diagnostics utility with both human-readable (Markdown) and machine-readable (JSON) output formats. It emphasizes reproducibility, modular design, and invariant-based testing rather than machine-specific assumptions.
+
+This project is part of a broader systems engineering progression focused on Linux infrastructure, automation, and AI-assisted tooling.
 
 ---
 
 ## What It Does
 
-Running the tool produces a full system report:
+The tool generates a complete snapshot of the system state:
 
-```
-## System Report — 2026-06-13 22:45:47 UTC
+* CPU usage, cores, frequency
+* RAM and swap utilization
+* Disk partitions and storage usage
+* Network interfaces and traffic statistics
+* Operating system metadata (kernel, uptime, host info)
 
-## CPU
-- **Model:** x86_64
-- **Physical cores:** 2
-- **Logical cores:** 4
-- **Usage (overall):** 2.7%
-- **Usage (per core):** [3.0, 6.8, 7.8, 3.0]
-- **Frequency (current):** 2592.0 MHz
+Output can be generated in:
 
-## RAM
-- **Total:** 7.7 GB
-- **Used:** 1.91 GB
-- **Available:** 5.79 GB
-- **Usage:** 24.8%
-- **Swap total:** 2.0 GB
-- **Swap used:** 0.0 GB
+* Markdown (human-readable reports)
+* JSON (machine-readable structured data)
 
-## Disk
-- **/**
-  - Device: /dev/sdd
-  - Filesystem: ext4
-  - Total: 1006.85 GB
-  - Used: 11.42 GB
-  - Free: 944.21 GB
-  - Usage: 1.2%
+---
 
-## Network
-- **lo**
-  - Address: 127.0.0.1 (family: 2)
-  - Sent: 38.0 MB / Received: 38.0 MB
-- **eth0**
-  - Address: 172.23.213.96 (family: 2)
-  - Sent: 2.38 MB / Received: 4.35 MB
+## Key Design Goals
 
-## Operating System
-- **OS:** Linux
-- **Kernel:** 6.18.33.1-microsoft-standard-WSL2
-- **Hostname:** your-hostname
-- **Username:** your-username
-- **Uptime:** 4h 10m 10s
-- **Boot time:** 2026-06-13 17:28:06 UTC
-```
+* Provide a unified CLI for system introspection
+* Ensure portability across Linux and WSL2 environments
+* Separate data collection from presentation logic
+* Support both human and machine consumption formats
+* Validate system behavior using invariant-based testing
 
 ---
 
@@ -61,144 +39,182 @@ Running the tool produces a full system report:
 
 ### Prerequisites
 
-- Linux or WSL2 (Ubuntu)
-- [uv](https://docs.astral.sh/uv/) — Python package manager
+* Linux or WSL2 (Ubuntu recommended)
+* Python 3.12+
+* uv (modern Python environment manager)
 
 ### Setup
 
-```bash
-git clone git@github.com:MelanieM2/linux-system-inspector.git
+```bash id="q9k2l1"
+git clone git@github.com:your-username/linux-system-inspector.git
 cd linux-system-inspector
 uv sync
 ```
 
-`uv sync` reads `pyproject.toml` and `uv.lock` and installs all dependencies into an isolated virtual environment automatically. No manual `pip install` or virtual environment activation is needed.
+Dependencies are installed into an isolated environment managed by `uv`, removing the need for manual virtual environment activation.
 
 ---
 
 ## Usage
 
-### Full report (all modules, Markdown)
+### Full system report
 
-```bash
+```bash id="k2v9x3"
 uv run main.py
 ```
 
 ### Select specific modules
 
-```bash
+```bash id="m8p1q7"
 uv run main.py --cpu
 uv run main.py --ram
 uv run main.py --disk
 uv run main.py --network
 uv run main.py --os
-uv run main.py --ram --os
 ```
 
 ### Output formats
 
-```bash
-uv run main.py --format md      # Markdown (default)
-uv run main.py --format json    # JSON
+```bash id="t5n0z2"
+uv run main.py --format md
+uv run main.py --format json
 ```
 
-### Save report to file
+### Save output to file
 
-```bash
+```bash id="r3v8a1"
 uv run main.py --output report.md
 uv run main.py --format json --output report.json
 ```
-
-### Help
-
-```bash
-uv run main.py --help
-```
-
----
-
-## Running Tests
-
-```bash
-uv run pytest tests/ -v
-```
-
-All 15 tests cover invariants — properties that must hold on any valid Linux system — rather than machine-specific values, making the test suite portable across different hardware.
 
 ---
 
 ## Project Structure
 
-```
+```text id="p1x7d9"
 linux-system-inspector/
 ├── inspector/
-│   ├── __init__.py
-│   ├── cpu.py          — CPU model, cores, usage, frequency
-│   ├── ram.py          — physical RAM and swap memory
-│   ├── disk.py         — partitions, usage per mountpoint
-│   ├── network.py      — interfaces, addresses, I/O counters
-│   └── os_info.py      — OS, kernel, hostname, uptime
+│   ├── cpu.py
+│   ├── ram.py
+│   ├── disk.py
+│   ├── network.py
+│   └── os_info.py
 ├── tests/
-│   ├── __init__.py
-│   ├── test_cpu.py     — 7 tests
-│   └── test_ram.py     — 8 tests
-├── main.py             — CLI entry point (argparse)
-├── reporter.py         — Markdown and JSON formatting
-├── pyproject.toml      — project config and dependencies
-├── uv.lock             — cryptographic dependency lockfile
-└── SECURITY.md         — supply chain security documentation
+│   ├── test_cpu.py
+│   └── test_ram.py
+├── main.py
+├── reporter.py
+├── pyproject.toml
+├── uv.lock
+└── SECURITY.md
 ```
+
+---
+
+## Architecture
+
+The system follows a modular separation of concerns:
+
+* **Inspector modules** → collect raw system data
+* **Reporter layer** → formats data into Markdown or JSON
+* **CLI layer** → parses arguments and orchestrates execution
+* **Test layer** → validates system invariants across environments
+
+This separation allows the tool to remain extensible while keeping data collection logic independent from output formatting.
+
+---
+
+## Testing Philosophy
+
+The test suite is built around **system invariants rather than fixed values**.
+
+Instead of asserting machine-specific outputs, tests verify properties such as:
+
+* CPU core count is positive
+* RAM usage percentages are within valid bounds
+* Disk usage values are consistent and non-negative
+* Network counters increase monotonically over time
+
+This approach ensures portability across:
+
+* different hardware configurations
+* virtual machines
+* WSL2 environments
 
 ---
 
 ## Tech Stack
 
-| Tool | Purpose |
-|---|---|
-| Python 3.12 | Language |
-| psutil | System metrics collection |
-| argparse | CLI interface |
-| pathlib | File output handling |
-| platform / socket / os | OS and network metadata |
-| pytest | Unit testing |
-| uv | Package management and virtual environments |
+| Component      | Technology  |
+| -------------- | ----------- |
+| Language       | Python 3.12 |
+| System Metrics | psutil      |
+| CLI            | argparse    |
+| Filesystem     | pathlib     |
+| Networking     | socket      |
+| Testing        | pytest      |
+| Environment    | uv          |
 
 ---
 
-## Security
+## Security & Supply Chain Practices
 
-We apply supply chain security practices to all dependencies. See [SECURITY.md](SECURITY.md) for full documentation covering exact version pinning, quarantine buffering, vulnerability scanning with `uv audit`, and cryptographic lockfile verification.
+This project follows strict dependency and supply chain security principles:
+
+* Fully pinned dependencies via `uv.lock`
+* Reproducible environment resolution with `uv`
+* Isolated virtual environments per project
+* Explicit dependency declarations in `pyproject.toml`
+* No runtime network dependency for core functionality
+
+See `SECURITY.md` for detailed security methodology.
 
 ---
 
 ## Known Limitations
 
-- `platform.processor()` returns the architecture string (`x86_64`) on Linux rather than the CPU model name. A fix using `/proc/cpuinfo` is planned for a future polish pass.
-- On WSL2, `freq_min_mhz` and `freq_max_mhz` are unavailable and reported as `null`. Only the current frequency is accessible.
-- Disk output on WSL2 shows the virtual disk (`/dev/sdd`) across multiple mountpoints with identical usage figures, reflecting WSL2's single `.vhdx` virtual disk architecture.
+* CPU model detection relies on `platform.processor()`, which may return architecture strings instead of full CPU names on Linux.
+* WSL2 does not expose full frequency range metadata (`freq_min`, `freq_max`).
+* Disk reporting reflects WSL2 virtual disk architecture, which may aggregate mountpoints under a single virtual device.
 
 ---
 
 ## Roadmap
 
-- [ ] Replace `platform.processor()` with `/proc/cpuinfo` parsing for accurate CPU model names
-- [ ] Deduplicate disk partitions by device
-- [ ] Add `--remote` flag for SSH-based inspection of remote machines
-- [ ] Mock `cpu_percent(interval=1)` in tests to reduce suite runtime
-- [ ] Add Windows drive visibility via `disk_partitions(all=True)`
+* Improve CPU detection via `/proc/cpuinfo`
+* Deduplicate disk mount reporting for WSL2 environments
+* Add SSH-based remote inspection mode (`--remote`)
+* Improve test performance by mocking CPU load sampling
+* Extend compatibility for Windows-native disk reporting
 
 ---
 
-## Development Notes
 
-Developed through guided learning sessions using **Claude Sonnet 4.6** 
-(Anthropic) as an AI pair-programming assistant used via chat interface. This was used to explain and learn
-concepts, review code structure, and discuss design decisions. 
-All modules were written, tested, and validated by the author, 
-with a focus on deep understanding over code generation.
+## Project Context
 
-## Author
+This project is part of a broader personal engineering track focused on:
 
-Melanie Maldonado is a professional Mathematician (Differential Geometry and Mathematical Physics), transitioning to AI/Data Science/ML Engineering.
+* Python-based automation systems
+* Linux system architecture and infrastructure design
+* Bash scripting for workflow automation
+* Applied machine learning and LLM-integrated pipelines
 
-This project is part of a series designed to help her learn more about Linux, Bash scripting, AI engineering, data science, machine learning, and geometric deep learning.
+The goal is to bridge theoretical foundations in mathematics and machine learning with practical systems engineering and production-style automation workflows.
+
+
+## Development Notes & AI Usage
+
+### AI-Assisted Engineering Workflow
+
+This project was developed using large language models (including Google Gemini and Anthropic Claude) as interactive pair-programming tools to support exploration of system design, code structuring, and implementation details.
+
+LLMs were used for:
+
+* Clarifying unfamiliar concepts
+* Exploring architectural design options
+* Reviewing and iterating on code structure
+* Accelerating development of boilerplate and automation logic
+
+All generated code was carefully reviewed, tested, and validated by the author to ensure correctness and full understanding of the implemented system.
+
+The final codebase reflects a combination of AI-assisted development and manual engineering decisions, with emphasis on maintainability, security, system-level clarity, and personal learning.
