@@ -1,6 +1,6 @@
 # Linux System Inspector
 
-A command-line system inspection tool that collects and reports structured information about CPU, memory, disk, network, and operating system state.
+In this project, we build a command-line system inspection tool that collects and reports structured information about CPU, memory, disk, network, and operating system state.
 
 The tool is designed as a portable systems diagnostics utility with both human-readable (Markdown) and machine-readable (JSON) output formats. It emphasizes reproducibility, modular design, and invariant-based testing rather than machine-specific assumptions.
 
@@ -190,23 +190,11 @@ See `SECURITY.md` for detailed security methodology.
 ---
 
 
-## Project Context
-
-This project is part of a broader personal engineering track focused on:
-
-* Python-based automation systems
-* Linux system architecture and infrastructure design
-* Bash scripting for workflow automation
-* Applied machine learning and LLM-integrated pipelines
-
-The goal is to bridge theoretical foundations in mathematics and machine learning with practical systems engineering and production-style automation workflows.
-
-
 ## Development Notes & AI Usage
 
 ### AI-Assisted Engineering Workflow
 
-This project was developed using large language models (including Google Gemini and Anthropic Claude) as interactive pair-programming tools to support exploration of system design, code structuring, and implementation details.
+This project was developed using large language models (LLMs), including Google Gemini and Anthropic Claude, as interactive pair-programming tools to support exploration of system design, code structuring, and implementation details.
 
 LLMs were used for:
 
@@ -218,3 +206,20 @@ LLMs were used for:
 All generated code was carefully reviewed, tested, and validated by the author to ensure correctness and full understanding of the implemented system.
 
 The final codebase reflects a combination of AI-assisted development and manual engineering decisions, with emphasis on maintainability, security, system-level clarity, and personal learning.
+
+---
+
+## Project Context
+
+This project is part of a broader personal engineering track focused on:
+
+* Python-based automation systems
+* Linux system architecture and infrastructure design
+* Bash scripting for workflow automation
+* Applied machine learning and LLM-integrated pipelines
+
+The author's long-term goal is to develop her expertise at the intersection of mathematics, data science, artificial intelligence, and systems engineering, bridging theoretical foundations in machine learning and deep learning with practical experience in software development, automation, and production-grade infrastructure.
+
+## Feedback
+
+This project is part of an ongoing learning and engineering journey. Constructive feedback, corrections, and suggestions for improvement are greatly appreciated. Please feel free to open an issue or contact the author through GitHub.
