@@ -192,20 +192,18 @@ See `SECURITY.md` for detailed security methodology.
 
 ## Development Notes & AI Usage
 
-### AI-Assisted Engineering Workflow
+### Development Methodology & AI Transparency
 
-This project was developed using large language models (LLMs), including Google Gemini and Anthropic Claude, as interactive pair-programming tools to support exploration of system design, code structuring, and implementation details.
+This repository is the result of an independent learning and development workflow, not agentic automation. While LLMs, such as Google Gemini and Anthropic Claude, were used to:
 
-LLMs were used for:
+* generate structural snippets,
+* clarify unfamiliar concepts,
+* explore architectural design options,
+* review and iterate on code structure,
+* accelerate development of boilerplate and automation logic,
 
-* Clarifying unfamiliar concepts
-* Exploring architectural design options
-* Reviewing and iterating on code structure
-* Accelerating development of boilerplate and automation logic
+their output was above all used as a learning foundation. I evaluated, corrected, and manually typed the implementation to ensure a personal understanding of system design principles in Linux and Python.
 
-All generated code was carefully reviewed, tested, and validated by the author to ensure correctness and full understanding of the implemented system.
-
-The final codebase reflects a combination of AI-assisted development and manual engineering decisions, with emphasis on maintainability, security, system-level clarity, and personal learning.
 
 ---
 
@@ -218,7 +216,7 @@ This project is part of a broader personal engineering track focused on:
 * Bash scripting for workflow automation
 * Applied machine learning and LLM-integrated pipelines
 
-The author's long-term goal is to develop her expertise at the intersection of mathematics, data science, artificial intelligence, and systems engineering, bridging theoretical foundations in machine learning and deep learning with practical experience in software development, automation, and production-grade infrastructure.
+The author's long-term goal is to develop her expertise at the intersection of mathematics, data science, artificial intelligence, and systems engineering, bridging mathematical foundations in machine learning and deep learning with practical experience in software development, automation, and production-grade infrastructure.
 
 ## Feedback
 
