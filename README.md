@@ -192,9 +192,9 @@ See `SECURITY.md` for detailed security methodology.
 
 ## Development Notes & AI Usage
 
-### Development Methodology & AI Transparency
+### AI-Assisted Pair-Programming
 
-This repository is the result of an independent learning and development workflow, not agentic automation. While LLMs, such as Google Gemini and Anthropic Claude, were used to:
+This repository is the result of an independent learning and development workflow, not agentic automation. While Claude Sonnet 4.6 was used to:
 
 * generate structural snippets,
 * clarify unfamiliar concepts,
@@ -202,8 +202,7 @@ This repository is the result of an independent learning and development workflo
 * review and iterate on code structure,
 * accelerate development of boilerplate and automation logic,
 
-their output was above all used as a learning foundation. I evaluated, corrected, and manually typed the implementation to ensure a personal understanding of system design principles in Linux and Python.
-
+its output was above all used as a learning foundation. I evaluated, corrected, and manually typed the implementation to ensure a personal understanding of system design principles in Linux and Python.
 
 ---
 
